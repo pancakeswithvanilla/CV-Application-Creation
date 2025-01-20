@@ -33,11 +33,11 @@ function App() {
     }
   };
 
-   // Function to format formData for the Section component
+
    const formatData = (data, fields) => {
     return fields.map((field) => ({
       label: field.name,
-      value: data[field.for] || '', // Use the field name as the key to access formData
+      value: data[field.for] || '', 
     }));
   };
 

@@ -1,14 +1,10 @@
 import { useState } from "react";
 
 function Form({ fields, onSubmit, initialData }) {
-    // Initialize formData with initialData or with empty values for each field
     console.log("Initial data:", initialData)
     const [formData, setFormData] = useState(() => {
-        // Initialize formData with empty values for each field
         const initialValues = {};
         fields.forEach(field => {
-            // If initialData is available, use it to set the initial value for each field
-            // Use field.for as the key and get the corresponding value from initialData
             initialValues[field.for] = initialData && initialData[field.for] || '';
           });
         console.log("Initial values", initialValues)
@@ -25,7 +21,7 @@ function Form({ fields, onSubmit, initialData }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit(formData); // Send the raw formData to the parent
+        onSubmit(formData); 
     };
 
     return (
@@ -38,7 +34,7 @@ function Form({ fields, onSubmit, initialData }) {
                             type={field.type}
                             id={field.id}
                             name={field.for}
-                            value={formData[field.for] || ''}  // Ensuring formData always has a value
+                            value={formData[field.for] || ''} 
                             onChange={handleChange}
                             required
                         /><br />
