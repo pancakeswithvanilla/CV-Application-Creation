@@ -1,4 +1,4 @@
-# CV-Application-Creation
+# CV-Application-Creation Odinproject challenge
 Create a new React project.
 Think about how to structure your application into components. Your application should include:
 A section to add general information like name, email and phone number.
