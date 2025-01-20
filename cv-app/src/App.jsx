@@ -80,12 +80,14 @@ function App() {
   console.log("General data:", generalData);
 
   return (
-    <>
+    <div id="content">
+      <h3>Create your own CV Application!</h3>
+      <div id = "cvappforms">
       {showGeneral && (
-        <>
-          <h1>Add general information:</h1>
+        <div class = "form">
+          <h3>Add general information:</h3>
           <Form fields={ffields} formData={generalData} setFormData={setGeneralData} onSubmit={(data) => handleFormSubmit(data, 'general')} />
-        </>
+        </div>
       )}
       {!showGeneral && (
         <Section
@@ -97,10 +99,10 @@ function App() {
       )}
 
       {showEducation && (
-        <>
-          <h1>Add educational experience:</h1>
+        <div class = "form">
+          <h3>Add educational experience:</h3>
           <Form fields={sfields} formData={educationData} setFormData={setEducationData} onSubmit={(data) => handleFormSubmit(data, 'education')} />
-        </>
+        </div>
       )}
       {!showEducation && (
         <Section
@@ -112,10 +114,10 @@ function App() {
       )}
 
       {showWork && (
-        <>
-          <h1>Add practical experience:</h1>
+        <div class = "form">
+          <h3>Add practical experience:</h3>
           <Form fields={tfields} formData={workData} setFormData={setWorkData} onSubmit={(data) => handleFormSubmit(data, 'work')} />
-        </>
+        </div>
       )}
       {!showWork && (
         <Section
@@ -125,7 +127,8 @@ function App() {
           showForm={showForm}
         />
       )}
-    </>
+      </div>
+    </div>
   );
 }
 
