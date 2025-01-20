@@ -4,13 +4,20 @@ import Form from './components/Form';
 import Section from './components/Section';
 
 function App() {
-  const [generalData, setGeneralData] = useState(null);
-  const [educationData, setEducationData] = useState(null);
-  const [workData, setWorkData] = useState(null);
+  
+  const initializeFormData = (fields, formData = {}) => {
+    const initialValues = {};
+    fields.forEach((field) => {
+      initialValues[field.for] = formData[field.for] || "";
+    });
+    console.log("Initial values", initialValues);
+    return initialValues;
+  };
+
   const [showGeneral, setShowGeneral] = useState(true);
   const [showEducation, setShowEducation] = useState(true);
   const [showWork, setShowWork] = useState(true);
-  console.log("General data:" , generalData)
+
   const showForm = (sectionType)=>{
     if(sectionType ==="general"){
       setShowGeneral(true);
@@ -61,18 +68,29 @@ function App() {
     { for: "untild", type: "date", id: "untild", name: "Date when you finished working: " },
   ];
 
+  const [generalData, setGeneralData] = useState(() =>
+    initializeFormData(ffields)
+  );
+  const [educationData, setEducationData] = useState(() =>
+    initializeFormData(sfields)
+  );
+  const [workData, setWorkData] = useState(() =>
+    initializeFormData(tfields)
+  );
+  console.log("General data:", generalData);
+
   return (
     <>
       {showGeneral && (
         <>
           <h1>Add general information:</h1>
-          <Form fields={ffields} initialData={generalData} onSubmit={(data) => handleFormSubmit(data, 'general')} />
+          <Form fields={ffields} formData={generalData} setFormData={setGeneralData} onSubmit={(data) => handleFormSubmit(data, 'general')} />
         </>
       )}
       {!showGeneral && (
         <Section
           title="General Information"
-          submittedData={formatData(generalData, ffields)} // Format data before passing it to Section
+          submittedData={formatData(generalData, ffields)} 
           type="general"
           showForm={showForm}
         />
@@ -81,13 +99,13 @@ function App() {
       {showEducation && (
         <>
           <h1>Add educational experience:</h1>
-          <Form fields={sfields} initialData={educationData} onSubmit={(data) => handleFormSubmit(data, 'education')} />
+          <Form fields={sfields} formData={educationData} setFormData={setEducationData} onSubmit={(data) => handleFormSubmit(data, 'education')} />
         </>
       )}
       {!showEducation && (
         <Section
           title="Educational Experience"
-          submittedData={formatData(educationData, sfields)} // Format data before passing it to Section
+          submittedData={formatData(educationData, sfields)} 
           type="education"
           showForm={showForm}
         />
@@ -96,13 +114,13 @@ function App() {
       {showWork && (
         <>
           <h1>Add practical experience:</h1>
-          <Form fields={tfields} initialData={workData} onSubmit={(data) => handleFormSubmit(data, 'work')} />
+          <Form fields={tfields} formData={workData} setFormData={setWorkData} onSubmit={(data) => handleFormSubmit(data, 'work')} />
         </>
       )}
       {!showWork && (
         <Section
           title="Practical Experience"
-          submittedData={formatData(workData, tfields)} // Format data before passing it to Section
+          submittedData={formatData(workData, tfields)} 
           type="work"
           showForm={showForm}
         />

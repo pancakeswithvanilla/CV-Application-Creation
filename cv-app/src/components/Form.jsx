@@ -1,16 +1,5 @@
-import { useState } from "react";
 
-function Form({ fields, onSubmit, initialData }) {
-    console.log("Initial data:", initialData)
-    const [formData, setFormData] = useState(() => {
-        const initialValues = {};
-        fields.forEach(field => {
-            initialValues[field.for] = initialData && initialData[field.for] || '';
-          });
-        console.log("Initial values", initialValues)
-        return initialValues;
-    });
-    console.log("form data:", formData)
+function Form({ fields, onSubmit, formData, setFormData }) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -34,7 +23,7 @@ function Form({ fields, onSubmit, initialData }) {
                             type={field.type}
                             id={field.id}
                             name={field.for}
-                            value={formData[field.for] || ''} 
+                            value={formData[field.for]} 
                             onChange={handleChange}
                             required
                         /><br />
